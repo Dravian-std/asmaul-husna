@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asmaul Husna — 99 Nama Terindah Allah</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-pale: #F5E6B8;
+    --gold-dim: #8A6F2E;
+    --emerald: #0D4A35;
+    --emerald-mid: #1A6B4A;
+    --emerald-light: #2A8F62;
+    --emerald-pale: #D4EDE3;
+    --cream: #FAF6EE;
+    --ink: #1A140A;
+    --ink-mid: #3D2E14;
+    --parchment: #F2E8D0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Crimson Pro', Georgia, serif;
+    background: var(--ink);
+    color: var(--cream);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* === CURSOR === */
+  #cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+  }
+  #cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.6;
+    transform: translate(-50%, -50%);
+  }
+
+  /* === NAV === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: linear-gradient(to bottom, rgba(26,20,10,0.95) 0%, transparent 100%);
+  }
+  nav .logo {
+    font-family: 'Amiri', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+  nav .nav-dots { display: flex; gap: 1rem; align-items: center; }
+  nav .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    border: none;
+    cursor: none;
+    transition: all 0.3s ease;
+  }
+  nav .nav-dot.active { background: var(--gold); transform: scale(1.4); }
+  nav .nav-dot:hover { background: var(--gold-light); transform: scale(1.4); }
+
+  section { min-height: 100vh; position: relative; overflow: hidden; }
+
+  /* === HERO === */
+  #hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at 30% 50%, #1A2D1E 0%, #0D1A10 40%, #0A0D08 100%);
+  }
+  #star-canvas { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
+  .hero-ornament-top {
+    position: absolute; top:5rem; left:50%; transform:translateX(-50%);
+    font-family: 'Amiri', serif; font-size:2.5rem; color:var(--gold); opacity:0.3; letter-spacing:0.5em;
+  }
+  .hero-arabic {
+    font-family: 'Amiri', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    color: var(--gold);
+    text-align: center;
+    line-height: 1.1;
+    text-shadow: 0 0 60px rgba(201,168,76,0.4), 0 0 120px rgba(201,168,76,0.15);
+    animation: heroGlow 4s ease-in-out infinite alternate;
+    position: relative; z-index: 2;
+  }
+  @keyframes heroGlow {
+    from { text-shadow: 0 0 40px rgba(201,168,76,0.3), 0 0 80px rgba(201,168,76,0.1); }
+    to { text-shadow: 0 0 80px rgba(201,168,76,0.6), 0 0 160px rgba(201,168,76,0.25); }
+  }
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.2rem, 3vw, 2.2rem);
+    color: var(--gold-light);
+    letter-spacing: 0.2em;
+    text-align: center;
+    margin: 1rem 0 0.5rem;
+    position: relative; z-index: 2;
+  }
+  .hero-subtitle {
+    font-size: 1.25rem; color: var(--parchment); text-align: center;
+    opacity: 0.7; font-style: italic; position: relative; z-index: 2;
+    max-width: 500px; line-height: 1.8;
+  }
+  .hero-line {
+    width: 200px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 1.5rem auto; position: relative; z-index: 2;
+  }
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0.5; z-index: 2; animation: scrollBounce 2s ease-in-out infinite;
+  }
+  .scroll-hint span { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gold); }
+  .scroll-hint .arrow-down { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); }
+  @keyframes scrollBounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* === PENGERTIAN === */
+  #pengertian {
+    background: var(--cream); color: var(--ink);
+    display: grid; grid-template-columns: 1fr 1fr; align-items: stretch;
+  }
+  .pengertian-left {
+    background: var(--emerald); padding: 6rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .pengertian-left::before {
+    content: 'الله'; font-family: 'Amiri', serif; font-size: 20rem;
+    position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+    color: rgba(201,168,76,0.06); pointer-events: none; line-height: 1;
+  }
+  .pengertian-left .section-label {
+    font-family: 'Cinzel Decorative', serif; font-size: 0.7rem;
+    letter-spacing: 0.3em; color: var(--gold-light); margin-bottom: 2rem;
+  }
+  .pengertian-left h2 { font-family: 'Amiri', serif; font-size: 3.5rem; color: var(--gold); line-height: 1.2; margin-bottom: 1.5rem; }
+  .pengertian-left p { color: var(--emerald-pale); font-size: 1.15rem; line-height: 1.9; max-width: 420px; }
+  .pengertian-right { padding: 6rem 4rem; background: var(--parchment); display: flex; flex-direction: column; justify-content: center; gap: 2.5rem; }
+  .fact-card {
+    display: flex; gap: 1.5rem; align-items: flex-start; padding: 1.5rem;
+    background: white; border-radius: 8px; border-left: 3px solid var(--gold);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .fact-card:hover { transform: translateX(8px); box-shadow: 0 4px 30px rgba(0,0,0,0.12); }
+  .fact-number { font-family: 'Amiri', serif; font-size: 2.5rem; color: var(--gold); line-height: 1; min-width: 60px; text-align: center; }
+  .fact-text h3 { font-family: 'Cinzel Decorative', serif; font-size: 0.9rem; color: var(--ink); margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+  .fact-text p { font-size: 1rem; color: var(--ink-mid); line-height: 1.7; }
+
+  /* === NAMA-NAMA === */
+  #nama-nama { background: var(--ink); padding: 5rem 3rem; }
+  .slide-header { text-align: center; margin-bottom: 4rem; }
+  .slide-header .label { font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; letter-spacing: 0.35em; color: var(--gold-dim); display: block; margin-bottom: 1rem; }
+  .slide-header h2 { font-family: 'Amiri', serif; font-size: 3rem; color: var(--gold); }
+  .slide-header .divider { width: 100px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 1rem auto 0; }
+  .names-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; max-width: 1200px; margin: 0 auto; }
+  .name-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px; padding: 1.2rem;
+    cursor: none; transition: all 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+  .name-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  .name-card:hover { border-color: rgba(201,168,76,0.5); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(201,168,76,0.1); }
+  .name-card:hover::before { opacity: 1; }
+  .name-card.clickable-card { cursor: none; }
+  .name-card.clickable-card:hover { border-color: var(--gold); box-shadow: 0 8px 30px rgba(201,168,76,0.25); }
+  .tap-hint {
+    font-size: 0.65rem; color: rgba(201,168,76,0.4); letter-spacing: 0.05em;
+    margin-top: 0.4rem; display: block; text-align: right;
+    transition: color 0.3s ease;
+  }
+  .name-card:hover .tap-hint { color: rgba(201,168,76,0.8); }
+  .name-number { font-size: 0.7rem; color: var(--gold-dim); letter-spacing: 0.1em; margin-bottom: 0.5rem; display: block; }
+  .name-arabic { font-family: 'Amiri', serif; font-size: 1.8rem; color: var(--gold-light); display: block; text-align: right; margin-bottom: 0.3rem; line-height: 1.3; transition: color 0.3s ease; }
+  .name-card:hover .name-arabic { color: var(--gold); }
+  .name-latin { font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.08em; display: block; margin-bottom: 0.3rem; }
+  .name-meaning { font-size: 0.9rem; color: rgba(250,246,238,0.55); font-style: italic; line-height: 1.5; }
+  .filter-bar { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .filter-btn {
+    padding: 0.4rem 1.1rem; background: transparent;
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 20px;
+    color: rgba(250,246,238,0.6); font-family: 'Crimson Pro', serif;
+    font-size: 0.9rem; cursor: none; transition: all 0.25s ease;
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: 600; }
+
+  /* === MAKNA KEHIDUPAN === */
+  #makna { background: linear-gradient(135deg, var(--parchment) 0%, #E8D9B0 100%); color: var(--ink); padding: 6rem 3rem; }
+  .makna-intro { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+  .makna-intro .label { font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; letter-spacing: 0.3em; color: var(--emerald); display: block; margin-bottom: 1rem; }
+  .makna-intro h2 { font-family: 'Amiri', serif; font-size: 3rem; color: var(--emerald); margin-bottom: 1rem; }
+  .makna-intro p { font-size: 1.15rem; color: var(--ink-mid); line-height: 1.9; font-style: italic; }
+
+  /* Active name indicator */
+  .makna-active-indicator {
+    text-align: center; margin-bottom: 2.5rem;
+    padding: 1rem 2rem;
+    background: rgba(13,74,53,0.1);
+    border-radius: 8px;
+    max-width: 700px; margin-left: auto; margin-right: auto;
+    border: 1px solid rgba(13,74,53,0.2);
+    display: none;
+  }
+  .makna-active-indicator.visible { display: block; margin-bottom: 2.5rem; }
+  .makna-active-indicator span { font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--emerald); }
+  .makna-active-indicator p { font-size: 0.85rem; color: var(--ink-mid); margin-top: 0.3rem; letter-spacing: 0.05em; }
+
+  .makna-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+  .makna-card {
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+  }
+  .makna-card:hover { transform: translateY(-8px) rotate(-0.5deg); box-shadow: 0 16px 40px rgba(0,0,0,0.15); }
+  .makna-card.highlighted {
+    outline: 3px solid var(--emerald);
+    box-shadow: 0 0 0 6px rgba(13,74,53,0.15), 0 16px 40px rgba(0,0,0,0.15);
+    transform: translateY(-6px);
+  }
+  .makna-card-top { padding: 2rem 1.8rem 1.5rem; position: relative; }
+  .makna-card-top.emerald { background: var(--emerald); }
+  .makna-card-top.gold { background: var(--gold-dim); }
+  .makna-card-top.ink { background: var(--ink-mid); }
+  .makna-arabic-bg { position: absolute; font-family: 'Amiri', serif; font-size: 7rem; opacity: 0.08; right: -0.5rem; top: -0.5rem; color: white; pointer-events: none; line-height: 1; }
+  .makna-card-top .name { font-family: 'Amiri', serif; font-size: 2.2rem; color: var(--gold-light); display: block; text-align: right; margin-bottom: 0.2rem; }
+  .makna-card-top .latin { font-family: 'Cinzel Decorative', serif; font-size: 0.75rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); display: block; margin-bottom: 0.3rem; }
+  .makna-card-top .meaning { font-size: 1rem; color: rgba(255,255,255,0.85); font-style: italic; }
+  .makna-card-body { padding: 1.5rem 1.8rem 2rem; }
+  .makna-card-body .life-title { font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold-dim); margin-bottom: 0.7rem; }
+  .makna-card-body p { font-size: 1rem; color: var(--ink-mid); line-height: 1.8; }
+  .makna-card-body .amalan { margin-top: 1rem; padding: 0.8rem 1rem; background: var(--parchment); border-radius: 6px; border-left: 3px solid var(--gold); font-size: 0.9rem; color: var(--ink); font-style: italic; }
+
+  /* Pagination for makna */
+  .makna-pagination {
+    display: flex; justify-content: center; align-items: center;
+    gap: 1rem; margin-top: 3rem;
+  }
+  .btn-page {
+    padding: 0.5rem 1.4rem; background: transparent;
+    border: 1px solid rgba(13,74,53,0.4); border-radius: 4px;
+    color: var(--emerald); font-family: 'Crimson Pro', serif; font-size: 1rem;
+    cursor: none; transition: all 0.2s ease;
+  }
+  .btn-page:hover { background: var(--emerald); color: var(--gold-light); }
+  .btn-page:disabled { opacity: 0.3; }
+  .page-info { font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--emerald); }
+
+  /* === KATA BIJAK (replaced Dzikir) === */
+  #kataBijak {
+    background: var(--emerald);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 5rem 3rem; position: relative; overflow: hidden; min-height: 100vh;
+  }
+  #kataBijak::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+  }
+  .bijak-header { text-align: center; margin-bottom: 4rem; position: relative; z-index: 2; }
+  .bijak-header .label { font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; letter-spacing: 0.3em; color: var(--gold-dim); display: block; margin-bottom: 1rem; }
+  .bijak-header h2 { font-family: 'Amiri', serif; font-size: 3rem; color: var(--gold); margin-bottom: 0.5rem; }
+  .bijak-header p { color: var(--emerald-pale); opacity: 0.7; font-style: italic; }
+
+  .bijak-card {
+    position: relative; z-index: 2;
+    max-width: 760px; width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 3rem 3.5rem;
+    text-align: center;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .bijak-card.fade-out { opacity: 0; transform: translateY(10px); }
+  .bijak-card.fade-in { opacity: 1; transform: translateY(0); }
+
+  .bijak-ornament {
+    font-family: 'Amiri', serif; font-size: 5rem;
+    color: rgba(201,168,76,0.1); display: block;
+    line-height: 1; margin-bottom: 1rem;
+  }
+  .bijak-arabic {
+    font-family: 'Amiri', serif; font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--gold); line-height: 1.9; direction: rtl;
+    margin-bottom: 1.5rem; display: block;
+    text-shadow: 0 0 30px rgba(201,168,76,0.2);
+  }
+  .bijak-divider {
+    width: 80px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 0 auto 1.5rem;
+  }
+  .bijak-terjemah {
+    font-size: 1.15rem; color: var(--emerald-pale);
+    font-style: italic; line-height: 1.9;
+    opacity: 0.85; margin-bottom: 1.5rem;
+  }
+  .bijak-source {
+    font-family: 'Cinzel Decorative', serif; font-size: 0.7rem;
+    letter-spacing: 0.2em; color: var(--gold-dim);
+  }
+
+  .bijak-controls {
+    position: relative; z-index: 2;
+    display: flex; gap: 1rem; margin-top: 3rem; align-items: center; flex-wrap: wrap; justify-content: center;
+  }
+  .btn-bijak {
+    padding: 0.7rem 2rem; background: transparent;
+    border: 1px solid rgba(201,168,76,0.4); border-radius: 4px;
+    color: var(--gold-light); font-family: 'Crimson Pro', serif;
+    font-size: 1rem; cursor: none; transition: all 0.2s ease;
+  }
+  .btn-bijak:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); }
+  .btn-bijak.btn-acak { background: rgba(201,168,76,0.1); border-color: var(--gold); font-weight: 600; }
+  .bijak-counter-dots {
+    display: flex; gap: 0.5rem; justify-content: center; margin-top: 2rem; position: relative; z-index: 2;
+  }
+  .bijak-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(201,168,76,0.2); transition: all 0.3s ease; }
+  .bijak-dot.active { background: var(--gold); transform: scale(1.4); }
+
+  /* === PENUTUP === */
+  #penutup {
+    background: var(--ink);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 5rem 3rem; position: relative; overflow: hidden;
+  }
+  .penutup-mandala {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px; opacity: 0.04;
+    animation: rotateSlow 40s linear infinite; pointer-events: none;
+  }
+  @keyframes rotateSlow {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  .penutup-ayat { font-family: 'Amiri', serif; font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold); line-height: 1.8; max-width: 800px; text-align: right; direction: rtl; margin-bottom: 1.5rem; position: relative; z-index: 2; }
+  .penutup-terjemah { font-size: 1.1rem; color: var(--parchment); font-style: italic; opacity: 0.7; max-width: 600px; line-height: 1.9; margin-bottom: 3rem; position: relative; z-index: 2; }
+  .penutup-source { font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold-dim); margin-bottom: 3rem; position: relative; z-index: 2; }
+  .penutup-99 { font-family: 'Amiri', serif; font-size: 8rem; color: var(--gold); opacity: 0.08; position: absolute; bottom: -1rem; right: 2rem; pointer-events: none; }
+
+  /* Credit section */
+  .penutup-credit {
+    position: relative; z-index: 2;
+    margin-top: 3rem; padding: 1.5rem 3rem;
+    border-top: 1px solid rgba(201,168,76,0.2);
+    text-align: center;
+  }
+  .penutup-credit .credit-label {
+    font-family: 'Cinzel Decorative', serif; font-size: 0.6rem;
+    letter-spacing: 0.3em; color: var(--gold-dim); display: block; margin-bottom: 0.6rem;
+  }
+  .penutup-credit .credit-name {
+    font-family: 'Amiri', serif; font-size: 1.4rem; color: var(--gold-light); display: block; margin-bottom: 0.2rem;
+  }
+  .penutup-credit .credit-detail {
+    font-size: 0.9rem; color: rgba(250,246,238,0.45); letter-spacing: 0.05em;
+  }
+
+  .names-scroll-ticker { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); margin-top: 2rem; position: relative; z-index: 2; }
+  .ticker-inner { display: flex; gap: 2rem; animation: ticker 30s linear infinite; width: max-content; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .ticker-name { font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--gold-dim); white-space: nowrap; padding: 0 0.5rem; }
+  .ticker-dot { color: var(--gold); opacity: 0.3; }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  /* ===== MOBILE RESPONSIVE ===== */
+  @media (max-width: 768px) {
+
+    /* Sembunyikan custom cursor di touch device */
+    #cursor, #cursor-ring { display: none; }
+    body { cursor: auto; }
+    .name-card, .filter-btn, .btn-page, .btn-bijak,
+    .bijak-dot, nav .nav-dot { cursor: pointer; }
+
+    /* Nav */
+    nav { padding: 0.8rem 1.2rem; }
+    nav .logo { font-size: 1.1rem; }
+    nav .nav-dot { width: 7px; height: 7px; }
+
+    /* Hero */
+    #hero { padding: 2rem 1.5rem; }
+    .hero-arabic { font-size: clamp(3rem, 14vw, 5rem); }
+    .hero-title { font-size: clamp(0.75rem, 3.5vw, 1.2rem); letter-spacing: 0.12em; }
+    .hero-subtitle { font-size: 1rem; padding: 0 1rem; }
+    .hero-line { width: 120px; }
+
+    /* Pengertian — stack vertikal */
+    #pengertian { grid-template-columns: 1fr; }
+    .pengertian-left { padding: 4rem 1.5rem 3rem; }
+    .pengertian-left h2 { font-size: 2.5rem; }
+    .pengertian-left p { font-size: 1rem; max-width: 100%; }
+    .pengertian-right { padding: 2.5rem 1.5rem 3rem; gap: 1.5rem; }
+    .fact-card { padding: 1.1rem; gap: 1rem; }
+    .fact-number { font-size: 2rem; min-width: 44px; }
+    .fact-text h3 { font-size: 0.75rem; }
+    .fact-text p { font-size: 0.9rem; }
+
+    /* Nama-nama grid */
+    #nama-nama { padding: 4rem 1rem; }
+    .slide-header h2 { font-size: 2.2rem; }
+    .names-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.7rem; }
+    .name-arabic { font-size: 1.5rem; }
+    .name-latin { font-size: 0.6rem; }
+    .name-meaning { font-size: 0.8rem; }
+    .tap-hint { font-size: 0.6rem; }
+    .filter-bar { gap: 0.4rem; padding: 0 0.5rem; }
+    .filter-btn { padding: 0.35rem 0.8rem; font-size: 0.8rem; }
+
+    /* Makna */
+    #makna { padding: 4rem 1rem; }
+    .makna-intro { margin-bottom: 2.5rem; }
+    .makna-intro h2 { font-size: 2rem; }
+    .makna-intro p { font-size: 1rem; }
+    .makna-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .makna-card-top { padding: 1.5rem 1.2rem 1.2rem; }
+    .makna-card-top .name { font-size: 1.8rem; }
+    .makna-card-body { padding: 1.2rem 1.2rem 1.5rem; }
+    .makna-card-body p { font-size: 0.95rem; }
+    .makna-active-indicator { padding: 0.8rem 1rem; }
+    .makna-pagination { gap: 0.6rem; margin-top: 2rem; }
+    .btn-page { padding: 0.5rem 1rem; font-size: 0.9rem; }
+
+    /* Kata Bijak */
+    #kataBijak { padding: 4rem 1.2rem; }
+    .bijak-header h2 { font-size: 2.2rem; }
+    .bijak-card { padding: 2rem 1.4rem; border-radius: 10px; }
+    .bijak-ornament { font-size: 3.5rem; }
+    .bijak-arabic { font-size: clamp(1.1rem, 4vw, 1.5rem); line-height: 2; }
+    .bijak-terjemah { font-size: 1rem; }
+    .bijak-source { font-size: 0.65rem; }
+    .bijak-controls { gap: 0.6rem; margin-top: 2rem; }
+    .btn-bijak { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+
+    /* Penutup */
+    #penutup { padding: 4rem 1.5rem; }
+    .penutup-ayat { font-size: clamp(1.4rem, 5vw, 2rem); text-align: center; }
+    .penutup-terjemah { font-size: 1rem; }
+    .penutup-mandala { width: 280px; height: 280px; }
+    .penutup-credit { padding: 1.2rem 1rem; }
+    .penutup-credit .credit-name { font-size: 1.2rem; }
+    .penutup-credit .credit-detail { font-size: 0.8rem; }
+    .ticker-name { font-size: 1.2rem; }
+
+    /* Dzikir counter (jika masih ada) */
+    .dzikir-container { gap: 2rem; }
+    .dzikir-selector { grid-template-columns: 1fr 1fr; gap: 0.6rem; max-width: 100%; }
+    .counter-circle { width: 170px; height: 170px; }
+    .counter-number { font-size: 3.5rem; }
+  }
+
+  /* Extra kecil — HP lama / layar < 380px */
+  @media (max-width: 380px) {
+    .names-grid { grid-template-columns: 1fr 1fr; }
+    .hero-arabic { font-size: 2.8rem; }
+    .bijak-arabic { font-size: 1rem; }
+    nav .nav-dots { gap: 0.6rem; }
+    .makna-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Tablet 769px - 1024px */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .makna-grid { grid-template-columns: repeat(2, 1fr); }
+    .names-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+    #pengertian { grid-template-columns: 1fr 1fr; }
+    .pengertian-left { padding: 4rem 2.5rem; }
+    .pengertian-right { padding: 4rem 2.5rem; }
+    .bijak-card { padding: 2.5rem 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <div class="logo">اسماء الحسنى</div>
+  <div class="nav-dots" id="navDots">
+    <button class="nav-dot active" data-target="hero"></button>
+    <button class="nav-dot" data-target="pengertian"></button>
+    <button class="nav-dot" data-target="nama-nama"></button>
+    <button class="nav-dot" data-target="makna"></button>
+    <button class="nav-dot" data-target="kataBijak"></button>
+    <button class="nav-dot" data-target="penutup"></button>
+  </div>
+</nav>
+
+<!-- SLIDE 1: HERO -->
+<section id="hero">
+  <canvas id="star-canvas"></canvas>
+  <div class="hero-ornament-top">✦ ✦ ✦</div>
+  <div class="hero-arabic reveal">اَلأَسْمَاءُ الْحُسْنَى</div>
+  <div class="hero-line"></div>
+  <div class="hero-title reveal">Asmaul Husna</div>
+  <div class="hero-subtitle reveal">99 Nama Terindah Allah — Cahaya Petunjuk dalam Setiap Langkah Kehidupan</div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="arrow-down"></div>
+  </div>
+</section>
+
+<!-- SLIDE 2: PENGERTIAN -->
+<section id="pengertian">
+  <div class="pengertian-left">
+    <div class="section-label">MENGENAL</div>
+    <h2 class="reveal">Apa itu<br>Asmaul Husna?</h2>
+    <p class="reveal"><em>Asmaul Husna</em> (الأسماء الحسنى) berasal dari kata <em>asma</em> (nama-nama) dan <em>husna</em> (yang baik/indah). Secara istilah, Asmaul Husna adalah nama-nama terbaik dan terindah yang dimiliki Allah SWT yang mencerminkan sifat-sifat kesempurnaan-Nya.</p>
+    <br>
+    <p class="reveal" style="opacity:0.7;">Allah berfirman dalam Al-Quran: <em>"Dialah Allah, tidak ada Tuhan selain Dia. Milik-Nyalah nama-nama yang terbaik."</em> — QS. Thaha: 8</p>
+  </div>
+  <div class="pengertian-right">
+    <div class="fact-card reveal">
+      <div class="fact-number">٩٩</div>
+      <div class="fact-text">
+        <h3>Jumlah Nama</h3>
+        <p>Rasulullah ﷺ bersabda: "Sesungguhnya Allah memiliki 99 nama, barangsiapa menghafalnya maka ia masuk surga." (HR. Bukhari & Muslim)</p>
+      </div>
+    </div>
+    <div class="fact-card reveal">
+      <div class="fact-number">٣</div>
+      <div class="fact-text">
+        <h3>Sumber Utama</h3>
+        <p>Al-Quran, Hadits shahih, dan ijma ulama menjadi dasar penetapan Asmaul Husna yang kita kenal.</p>
+      </div>
+    </div>
+    <div class="fact-card reveal">
+      <div class="fact-number">∞</div>
+      <div class="fact-text">
+        <h3>Manfaat Mengamalkan</h3>
+        <p>Menghafalkan, memahami, dan mengamalkan Asmaul Husna mendatangkan ketenangan jiwa, kebaikan akhlak, dan kedekatan dengan Allah.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: NAMA-NAMA -->
+<section id="nama-nama">
+  <div class="slide-header reveal">
+    <span class="label">EKSPLORASI</span>
+    <h2>99 Nama Allah</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" data-cat="all">Semua</button>
+    <button class="filter-btn" data-cat="rahman">Kasih Sayang</button>
+    <button class="filter-btn" data-cat="kudrah">Kekuasaan</button>
+    <button class="filter-btn" data-cat="ilm">Ilmu</button>
+    <button class="filter-btn" data-cat="hidup">Kehidupan</button>
+    <button class="filter-btn" data-cat="dzat">Dzat</button>
+  </div>
+  <div class="names-grid" id="namesGrid"></div>
+</section>
+
+<!-- SLIDE 4: MAKNA KEHIDUPAN -->
+<section id="makna">
+  <div class="makna-intro reveal">
+    <span class="label">REFLEKSI</span>
+    <h2>Makna dalam Kehidupan Sehari-hari</h2>
+    <p>Setiap nama Allah bukan sekadar hafalan — ia adalah cermin dan pedoman hidup. Ketuk salah satu nama dari daftar 99 untuk langsung melihat maknanya di sini.</p>
+  </div>
+
+  <div class="makna-active-indicator" id="maknaIndicator">
+    <span id="indicatorArabic"></span>
+    <p id="indicatorLatin"></p>
+  </div>
+
+  <div class="makna-grid" id="maknaGrid"></div>
+
+  <div class="makna-pagination">
+    <button class="btn-page" id="btnPrevPage" disabled>← Sebelumnya</button>
+    <span class="page-info" id="pageInfo">1 / 17</span>
+    <button class="btn-page" id="btnNextPage">Berikutnya →</button>
+  </div>
+</section>
+
+<!-- SLIDE 5: KATA BIJAK -->
+<section id="kataBijak">
+  <div class="bijak-header reveal">
+    <span class="label">HIKMAH & RENUNGAN</span>
+    <h2>Kata-kata Bijak</h2>
+    <p>Firman Allah dan sabda Rasul-Nya sebagai cahaya kehidupan</p>
+  </div>
+
+  <div class="bijak-card" id="bijakCard">
+    <span class="bijak-ornament">❝</span>
+    <span class="bijak-arabic" id="bijakArabic"></span>
+    <div class="bijak-divider"></div>
+    <div class="bijak-terjemah" id="bijakTerjemah"></div>
+    <div class="bijak-source" id="bijakSource"></div>
+  </div>
+
+  <div class="bijak-counter-dots" id="bijakDots"></div>
+
+  <div class="bijak-controls">
+    <button class="btn-bijak" id="btnBijakPrev">← Sebelumnya</button>
+    <button class="btn-bijak btn-acak" id="btnBijakAcak">✦ Acak</button>
+    <button class="btn-bijak" id="btnBijakNext">Berikutnya →</button>
+  </div>
+</section>
+
+<!-- SLIDE 6: PENUTUP -->
+<section id="penutup">
+  <svg class="penutup-mandala" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="200" r="180" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="140" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="100" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="60" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+    <g transform="translate(200,200)">
+      <line x1="0" y1="-180" x2="0" y2="180" stroke="#C9A84C" stroke-width="0.3"/>
+      <line x1="-180" y1="0" x2="180" y2="0" stroke="#C9A84C" stroke-width="0.3"/>
+      <line x1="-127" y1="-127" x2="127" y2="127" stroke="#C9A84C" stroke-width="0.3"/>
+      <line x1="127" y1="-127" x2="-127" y2="127" stroke="#C9A84C" stroke-width="0.3"/>
+      <polygon points="0,-160 138,-80 138,80 0,160 -138,80 -138,-80" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+      <polygon points="0,-120 104,-60 104,60 0,120 -104,60 -104,-60" fill="none" stroke="#C9A84C" stroke-width="0.5"/>
+      <polygon points="0,160 138,-80 -138,-80" fill="none" stroke="#C9A84C" stroke-width="0.3"/>
+      <polygon points="0,-160 138,80 -138,80" fill="none" stroke="#C9A84C" stroke-width="0.3"/>
+    </g>
+  </svg>
+
+  <div class="penutup-ayat reveal">
+    وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا
+  </div>
+  <div class="penutup-terjemah reveal">
+    "Dan milik Allah-lah nama-nama yang terbaik, maka bermohonlah kepada-Nya dengan menyebut nama-nama itu."
+  </div>
+  <div class="penutup-source reveal">— QS. AL-A'RAF : 180</div>
+
+  <div class="names-scroll-ticker">
+    <div class="ticker-inner" id="tickerInner"></div>
+  </div>
+
+  <div class="penutup-credit reveal">
+    <span class="credit-label">DIBUAT OLEH</span>
+    <span class="credit-name">Danang Rafli Juvianto</span>
+    <span class="credit-detail">Kelas B &nbsp;·&nbsp; NIM K3525054</span>
+  </div>
+
+  <div class="penutup-99">٩٩</div>
+</section>
+
+<script>
+// ===== CURSOR — hanya aktif di non-touch device =====
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+if (!isTouchDevice) {
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.25;
+    ry += (my - ry) * 0.25;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+} else {
+  cursor.style.display = 'none';
+  ring.style.display = 'none';
+  document.body.style.cursor = 'auto';
+}
+
+// ===== STAR CANVAS =====
+const canvas = document.getElementById('star-canvas');
+const ctx = canvas.getContext('2d');
+let stars = [];
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+for (let i = 0; i < 200; i++) {
+  stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5+0.3, speed: Math.random()*0.3+0.05, opacity: Math.random()*0.7+0.1, twinkle: Math.random()*Math.PI*2 });
+}
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    s.twinkle += 0.02;
+    const op = s.opacity * (0.6 + 0.4 * Math.sin(s.twinkle));
+    ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(201,168,76,${op})`; ctx.fill();
+    s.y -= s.speed;
+    if (s.y < -2) { s.y = canvas.height + 2; s.x = Math.random()*canvas.width; }
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// ===== NAV DOTS =====
+const sections = ['hero','pengertian','nama-nama','makna','kataBijak','penutup'];
+const navDots = document.querySelectorAll('.nav-dot');
+navDots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    document.getElementById(sections[i]).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = sections.indexOf(e.target.id);
+      navDots.forEach(d => d.classList.remove('active'));
+      if (idx >= 0) navDots[idx].classList.add('active');
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+
+// ===== SCROLL REVEAL =====
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ===== ASMAUL HUSNA DATA =====
+const allNames = [
+  {n:1,ar:'الرَّحْمَنُ',lat:'Ar-Rahman',mean:'Yang Maha Pengasih',cat:'rahman',
+   makna:'Allah mengasihi seluruh makhluk tanpa memandang iman atau kufur-nya. Ia menurunkan hujan, memberikan rezeki, dan menghidupkan bumi bagi semua.',
+   amalan:'Jadilah pengasih kepada sesama. Bahkan kebaikan kecil kepada makhluk Allah adalah bentuk meneladani sifat-Nya.', color:'#0D4A35'},
+  {n:2,ar:'الرَّحِيمُ',lat:'Ar-Rahim',mean:'Yang Maha Penyayang',cat:'rahman',
+   makna:'Kasih sayang Allah yang khusus tercurah kepada orang-orang beriman di dunia dan akhirat. Ia mengampuni, membimbing, dan menjaga hamba-hamba-Nya yang beriman.',
+   amalan:'Perbanyak taubat dan istighfar. Yakinlah bahwa Allah selalu menyayangi hamba-Nya yang kembali kepada-Nya.', color:'#0D4A35'},
+  {n:3,ar:'الْمَلِكُ',lat:'Al-Malik',mean:'Yang Maha Merajai',cat:'kudrah',
+   makna:'Allah adalah Raja segala raja. Seluruh kekuasaan di langit dan bumi adalah milik-Nya. Tidak ada satu pun yang luput dari kekuasaan dan kepemilikan-Nya.',
+   amalan:'Jangan sombong dengan jabatan atau kekayaan dunia. Semua hanyalah titipan dari Sang Raja sejati.', color:'#8A6F2E'},
+  {n:4,ar:'الْقُدُّوسُ',lat:'Al-Quddus',mean:'Yang Maha Suci',cat:'dzat',
+   makna:'Allah Maha Suci dari segala kekurangan, kelemahan, dan keserupaan dengan makhluk. Kesucian-Nya melampaui seluruh pengertian manusia.',
+   amalan:'Jaga kesucian hati, pikiran, dan perbuatan. Kebersihan lahir dan batin adalah cerminan kecintaan kepada Allah Al-Quddus.', color:'#2D1B69'},
+  {n:5,ar:'السَّلاَمُ',lat:'As-Salam',mean:'Yang Maha Memberi Kesejahteraan',cat:'rahman',
+   makna:'Allah adalah sumber segala keselamatan dan kedamaian. Syurga pun dinamakan Darussalam, negeri keselamatan yang menjadi anugerah-Nya.',
+   amalan:'Sebarkan salam dan kedamaian. Ucapan salam bukan sekadar basa-basi, melainkan doa keselamatan yang tulus.', color:'#0D4A35'},
+  {n:6,ar:'الْمُؤْمِنُ',lat:'Al-Mumin',mean:'Yang Maha Memberi Keamanan',cat:'rahman',
+   makna:'Allah memberikan rasa aman kepada hamba-hamba-Nya yang beriman. Keamanan sejati hanya datang dari-Nya, bukan dari harta atau kekuatan manusia.',
+   amalan:'Letakkan rasa aman hanya kepada Allah, bukan kepada manusia atau materi. Ketenangan jiwa adalah hadiah dari-Nya.', color:'#0D4A35'},
+  {n:7,ar:'الْمُهَيْمِنُ',lat:'Al-Muhaimin',mean:'Yang Maha Memelihara',cat:'kudrah',
+   makna:'Allah memantau, menjaga, dan melindungi seluruh ciptaan-Nya. Tidak ada satu daun pun yang jatuh tanpa sepengetahuan-Nya.',
+   amalan:'Bertawakallah kepada Allah dalam setiap urusan. Ia yang memelihara, menjaga, dan mengatur segalanya.', color:'#8A6F2E'},
+  {n:8,ar:'الْعَزِيزُ',lat:'Al-Aziz',mean:'Yang Maha Perkasa',cat:'kudrah',
+   makna:'Kemuliaan dan keperkasaan sejati hanya milik Allah. Tidak ada yang mampu mengalahkan atau menandingi kekuasaan-Nya.',
+   amalan:'Cari kemuliaan hanya dari Allah, bukan dari manusia. Beribadah dengan ikhlas adalah jalan menuju kemuliaan sejati.', color:'#8A6F2E'},
+  {n:9,ar:'الْجَبَّارُ',lat:'Al-Jabbar',mean:'Yang Maha Berkehendak',cat:'kudrah',
+   makna:'Allah memiliki kehendak mutlak. Ia memperbaiki yang rusak, mengangkat yang hina, dan tidak ada yang mampu menolak kehendak-Nya.',
+   amalan:'Pasrahkan seluruh urusan kepada-Nya. Allah Maha Berkehendak untuk memperbaiki setiap keadaan yang tampak mustahil.', color:'#8A6F2E'},
+  {n:10,ar:'الْمُتَكَبِّرُ',lat:'Al-Mutakabbir',mean:'Yang Memiliki Keagungan',cat:'dzat',
+   makna:'Keagungan mutlak hanya layak bagi Allah. Kesombongan pada manusia adalah noda, namun pada Allah adalah kesempurnaan yang hakiki.',
+   amalan:'Jauhkan diri dari sifat sombong. Keagungan sejati hanya milik Allah, manusia hanyalah hamba yang bergantung kepada-Nya.', color:'#2D1B69'},
+  {n:11,ar:'الْخَالِقُ',lat:'Al-Khaliq',mean:'Yang Maha Pencipta',cat:'kudrah',
+   makna:'Allah menciptakan segala sesuatu dari tiada menjadi ada. Setiap ciptaan-Nya menyimpan keindahan dan hikmah yang tiada tara.',
+   amalan:'Renungkan keajaiban ciptaan Allah di alam semesta. Rasa kagum kepada ciptaan-Nya menambah keimanan dan ketakwaan.', color:'#8A6F2E'},
+  {n:12,ar:'الْبَارِئُ',lat:'Al-Bari',mean:'Yang Maha Melepaskan',cat:'kudrah',
+   makna:'Allah menciptakan makhluk dan membebaskannya sesuai dengan bentuk yang dikehendaki-Nya. Setiap bentuk ciptaan adalah kesengajaan ilahi.',
+   amalan:'Terima diri sendiri sebagaimana Allah menciptakannya. Syukuri fisik, kemampuan, dan keunikan yang telah dianugerahkan.', color:'#8A6F2E'},
+  {n:13,ar:'الْمُصَوِّرُ',lat:'Al-Musawwir',mean:'Yang Maha Membentuk Rupa',cat:'kudrah',
+   makna:'Allah adalah Sang Seniman Agung yang membentuk rupa setiap makhluk dengan kesempurnaan dan keindahan yang unik.',
+   amalan:'Hargai setiap keunikan manusia. Tidak ada dua orang yang identik karena Allah Al-Musawwir menciptakan keberagaman sebagai tanda kebesaran-Nya.', color:'#8A6F2E'},
+  {n:14,ar:'الْغَفَّارُ',lat:'Al-Ghaffar',mean:'Yang Maha Pengampun',cat:'rahman',
+   makna:'Allah berulang kali mengampuni dosa hamba-hamba-Nya. Pengampunan-Nya tidak pernah habis meski dosa terus berulang selama ada taubat yang sungguh.',
+   amalan:'Jangan berputus asa dari ampunan Allah. Taubat nasuha membuka lembaran baru yang bersih di hadapan Allah Al-Ghaffar.', color:'#0D4A35'},
+  {n:15,ar:'الْقَهَّارُ',lat:'Al-Qahhar',mean:'Yang Maha Menundukkan',cat:'kudrah',
+   makna:'Allah menundukkan segala sesuatu sesuai kehendak-Nya. Kekuatan terbesar di alam semesta pun tunduk di hadapan kekuasaan-Nya.',
+   amalan:'Rendahkan hati di hadapan Allah. Kesombongan adalah penyakit yang menjadikan manusia lupa kepada Yang Maha Menundukkan segalanya.', color:'#8A6F2E'},
+  {n:16,ar:'الْوَهَّابُ',lat:'Al-Wahhab',mean:'Yang Maha Pemberi Karunia',cat:'rahman',
+   makna:'Allah memberi karunia tanpa batas dan tanpa mengharapkan imbalan. Setiap nikmat yang kita rasakan adalah hadiah langsung dari Al-Wahhab.',
+   amalan:'Jadilah pemurah dan suka memberi. Meneladani sifat Al-Wahhab adalah dengan berbagi tanpa pamrih kepada sesama.', color:'#0D4A35'},
+  {n:17,ar:'الرَّزَّاقُ',lat:'Ar-Razzaq',mean:'Yang Maha Pemberi Rezeki',cat:'rahman',
+   makna:'Rezeki bukan hanya uang — ia adalah kesehatan, ilmu, keluarga, dan waktu. Allah telah menjamin rezeki setiap makhluk sejak sebelum dilahirkan.',
+   amalan:'Bersyukur dan tidak kikir. Berbagi rezeki adalah bukti keyakinan bahwa Allah yang mencukupkan.', color:'#0D4A35'},
+  {n:18,ar:'الْفَتَّاحُ',lat:'Al-Fattah',mean:'Yang Maha Pembuka',cat:'kudrah',
+   makna:'Allah membuka pintu rahmat, rezeki, dan kemenangan bagi siapa yang dikehendaki-Nya. Tidak ada pintu yang terkunci bagi kehendak-Nya.',
+   amalan:'Jangan putus berdoa dan berusaha. Ketika semua pintu tampak tertutup, Allah Al-Fattah memiliki kunci untuk setiap pintu.', color:'#8A6F2E'},
+  {n:19,ar:'الْعَلِيمُ',lat:'Al-Alim',mean:'Yang Maha Mengetahui',cat:'ilm',
+   makna:'Allah mengetahui apa yang tersembunyi di dalam hati, yang terjadi di kegelapan malam, dan apa yang akan terjadi hingga akhir zaman.',
+   amalan:'Jaga keikhlasan dalam setiap amal. Niat yang benar di hadapan Allah lebih bernilai dari pujian manusia.', color:'#1A3A5C'},
+  {n:20,ar:'الْقَابِضُ',lat:'Al-Qabidh',mean:'Yang Maha Menyempitkan',cat:'kudrah',
+   makna:'Allah yang menyempitkan rezeki dan kelapangan sebagai ujian bagi hamba-Nya. Kesempitan adalah cara Allah mendidik dan memuliakan jiwa.',
+   amalan:'Terima dengan sabar setiap masa sulit. Penyempitan adalah bagian dari rencana Allah yang lebih besar dan penuh hikmah.', color:'#8A6F2E'},
+  {n:21,ar:'الْبَاسِطُ',lat:'Al-Basith',mean:'Yang Maha Melapangkan',cat:'kudrah',
+   makna:'Allah melapangkan rezeki dan kehidupan bagi siapa yang dikehendaki-Nya. Setelah setiap kesempitan pasti ada kelapangan dari-Nya.',
+   amalan:'Tetaplah optimis dan bersyukur. Allah Al-Basith selalu siap membuka jalan kelapangan bagi hamba yang bersabar.', color:'#8A6F2E'},
+  {n:22,ar:'الْخَافِضُ',lat:'Al-Khafidh',mean:'Yang Maha Merendahkan',cat:'kudrah',
+   makna:'Allah merendahkan siapa yang dikehendaki-Nya. Kekuatan tanpa ridha Allah akan runtuh, dan keangkuhan hanya menanti kejatuhan.',
+   amalan:'Jauhi kesombongan dan kezaliman. Allah merendahkan yang takabur dan meninggikan yang tawadhu.', color:'#8A6F2E'},
+  {n:23,ar:'الرَّافِعُ',lat:'Ar-Rafi',mean:'Yang Maha Meninggikan',cat:'kudrah',
+   makna:'Allah meninggikan derajat siapa yang dikehendaki-Nya. Kemuliaan sejati datang dari taqwa, bukan dari harta atau nasab.',
+   amalan:'Tingkatkan ilmu, amal, dan ketaqwaan. Allah akan meninggikan derajat orang yang sungguh-sungguh mendekat kepada-Nya.', color:'#8A6F2E'},
+  {n:24,ar:'الْمُعِزُّ',lat:'Al-Muizz',mean:'Yang Maha Memuliakan',cat:'kudrah',
+   makna:'Kemuliaan yang sesungguhnya hanya bisa datang dari Allah. Ia memuliakan orang-orang beriman dengan iman dan amal shalih mereka.',
+   amalan:'Cari kemuliaan melalui ketaatan kepada Allah, bukan melalui kekayaan materi atau pujian manusia.', color:'#8A6F2E'},
+  {n:25,ar:'الْمُذِلُّ',lat:'Al-Mudzill',mean:'Yang Maha Menghinakan',cat:'kudrah',
+   makna:'Allah menghinakan siapa yang menyombongkan diri dan melampaui batas. Tidak ada kehinaan yang lebih dalam dari jauh dari Allah.',
+   amalan:'Tetap rendah hati dalam segala keadaan. Kehinaan sejati bukan karena miskin, tapi karena jauh dari ridha Allah.', color:'#8A6F2E'},
+  {n:26,ar:'السَّمِيعُ',lat:'As-Sami',mean:'Yang Maha Mendengar',cat:'ilm',
+   makna:'Allah mendengar setiap ucapan, bisikan hati, bahkan doa yang belum terucap. Tidak ada suara yang terlalu pelan bagi pendengaran-Nya.',
+   amalan:'Jaga setiap ucapan. Manfaatkan sifat As-Sami dengan berdoa sungguh-sungguh kapan saja dan di mana saja.', color:'#1A3A5C'},
+  {n:27,ar:'الْبَصِيرُ',lat:'Al-Bashir',mean:'Yang Maha Melihat',cat:'ilm',
+   makna:'Allah melihat segala sesuatu tanpa terbatas oleh kegelapan, jarak, atau penghalang. Setiap perbuatan kita selalu dalam pengawasan-Nya.',
+   amalan:'Beramal dengan ihsan — seolah-olah Allah selalu melihat kita. Karena memang demikianlah adanya.', color:'#1A3A5C'},
+  {n:28,ar:'الْحَكَمُ',lat:'Al-Hakam',mean:'Yang Maha Menetapkan',cat:'ilm',
+   makna:'Allah adalah Hakim yang Maha Adil. Semua keputusan ada di tangan-Nya dan tidak ada keputusan yang lebih adil dari keputusan Allah.',
+   amalan:'Terima setiap ketetapan dengan ikhlas. Ridha terhadap hukum Allah adalah kunci ketenangan hati yang sempurna.', color:'#1A3A5C'},
+  {n:29,ar:'الْعَدْلُ',lat:'Al-Adl',mean:'Yang Maha Adil',cat:'dzat',
+   makna:'Keadilan Allah adalah mutlak dan sempurna. Tidak ada satu pun kebaikan yang terlewat dan tidak ada satu pun kezaliman yang dibiarkan.',
+   amalan:'Tegakkan keadilan dalam kehidupan sehari-hari. Berlaku adil adalah wujud nyata mengimani sifat Al-Adl.', color:'#2D1B69'},
+  {n:30,ar:'اللَّطِيفُ',lat:'Al-Lathif',mean:'Yang Maha Lembut',cat:'rahman',
+   makna:'Allah bekerja dengan cara-cara yang lembut dan tak terduga. Pertolongan-Nya datang tanpa disadari melalui jalan yang paling tak terduga.',
+   amalan:'Perhatikan kelembutan Allah dalam setiap peristiwa hidup. Sering kali bantuan-Nya hadir dalam wujud yang tidak kita sangka.', color:'#0D4A35'},
+  {n:31,ar:'الْخَبِيرُ',lat:'Al-Khabir',mean:'Yang Maha Mengenal',cat:'ilm',
+   makna:'Allah mengenal setiap hal secara mendalam dan mendetail. Bahkan isi hati yang paling tersembunyi sekalipun diketahui oleh Al-Khabir.',
+   amalan:'Jujurlah kepada diri sendiri dan kepada Allah. Tidak ada yang bisa disembunyikan dari Yang Maha Mengenal.', color:'#1A3A5C'},
+  {n:32,ar:'الْحَلِيمُ',lat:'Al-Halim',mean:'Yang Maha Penyantun',cat:'rahman',
+   makna:'Allah tidak segera menghukum meski hamba-Nya berbuat dosa. Kesantunan-Nya memberi waktu dan kesempatan untuk bertobat.',
+   amalan:'Sabar dan santun dalam menghadapi kesalahan orang lain. Meneladani Al-Halim berarti memberikan kesempatan kepada sesama untuk berubah.', color:'#0D4A35'},
+  {n:33,ar:'الْعَظِيمُ',lat:'Al-Adzim',mean:'Yang Maha Agung',cat:'dzat',
+   makna:'Keagungan Allah melampaui segala deskripsi dan bayangan. Seluruh alam semesta hanyalah setitik kecil di hadapan kebesaran-Nya.',
+   amalan:'Perbanyak dzikir mengagungkan Allah. Merasakan keagungan-Nya menghapus kesombongan dan menghadirkan kekhusyukan dalam ibadah.', color:'#2D1B69'},
+  {n:34,ar:'الْغَفُورُ',lat:'Al-Ghafur',mean:'Yang Maha Pengampun',cat:'rahman',
+   makna:'Tidak ada dosa yang terlalu besar bagi ampunan Allah selama hamba bertaubat dengan sungguh-sungguh. Rahmat-Nya melampaui murka-Nya.',
+   amalan:'Jangan putus asa dari rahmat Allah. Istighfar adalah pintu yang selalu terbuka.', color:'#5C2A0F'},
+  {n:35,ar:'الشَّكُورُ',lat:'Asy-Syakur',mean:'Yang Maha Mensyukuri',cat:'rahman',
+   makna:'Allah menghargai setiap kebaikan sekecil apapun yang dilakukan hamba-Nya dan membalasnya dengan pahala yang berlipat ganda.',
+   amalan:'Tidak ada kebaikan yang sia-sia di hadapan Allah. Sekecil apapun amal yang dilakukan dengan ikhlas, Allah Al-Syakur akan membalasnya.', color:'#0D4A35'},
+  {n:36,ar:'الْعَلِيُّ',lat:'Al-Ali',mean:'Yang Maha Tinggi',cat:'dzat',
+   makna:'Allah berada di atas segalanya, jauh melampaui jangkauan pikiran dan imajinasi manusia. Ketinggian-Nya adalah ketinggian dzat dan sifat.',
+   amalan:'Angkat harapan dan tujuan setinggi mungkin kepada Allah. Jangan rendahkan diri dengan meminta kepada selain-Nya.', color:'#2D1B69'},
+  {n:37,ar:'الْكَبِيرُ',lat:'Al-Kabir',mean:'Yang Maha Besar',cat:'dzat',
+   makna:'Kebesaran Allah tidak terbatas dan tidak terbandingkan. Seluruh kebesaran yang ada di alam semesta hanyalah pantulan kecil dari kebesaran-Nya.',
+   amalan:'Takbirkan Allah dalam setiap situasi. Allahu Akbar bukan sekadar ucapan — ia adalah pengakuan bahwa Allah lebih besar dari segalanya.', color:'#2D1B69'},
+  {n:38,ar:'الْحَفِيظُ',lat:'Al-Hafidz',mean:'Yang Maha Memelihara',cat:'kudrah',
+   makna:'Allah memelihara dan menjaga seluruh ciptaan-Nya. Setiap amal, setiap kejadian, setiap rahasia tersimpan rapi dalam catatan-Nya.',
+   amalan:'Jagalah kepercayaan yang diberikan orang lain. Meneladani Al-Hafidz berarti menjadi penjaga yang amanah dan dapat dipercaya.', color:'#8A6F2E'},
+  {n:39,ar:'الْمُقِيتُ',lat:'Al-Muqit',mean:'Yang Maha Pemberi Kecukupan',cat:'rahman',
+   makna:'Allah memberikan kecukupan bagi setiap makhluk sesuai dengan kebutuhannya. Tidak ada satu pun yang kekurangan atas pemberian-Nya.',
+   amalan:'Syukuri apa yang ada dan cukupkan diri dengan pemberian Allah. Qanaah adalah kunci kebahagiaan yang sejati.', color:'#0D4A35'},
+  {n:40,ar:'الْحَسِيبُ',lat:'Al-Hasib',mean:'Yang Maha Membuat Perhitungan',cat:'ilm',
+   makna:'Allah membuat perhitungan yang sangat akurat atas segala amal perbuatan hamba-Nya. Tidak ada yang luput dari perhitungan-Nya.',
+   amalan:'Evaluasi diri setiap hari sebelum amal dihitung di akhirat. Hisab diri sendiri sebelum dihisab oleh Allah Al-Hasib.', color:'#1A3A5C'},
+  {n:41,ar:'الْجَلِيلُ',lat:'Al-Jalil',mean:'Yang Maha Luhur',cat:'dzat',
+   makna:'Allah memiliki keluhuran yang sempurna dalam dzat dan sifat-Nya. Keluhuran-Nya tercermin dalam setiap ciptaan dan ketetapan-Nya.',
+   amalan:'Agungkan Allah dalam setiap ucapan dan perbuatan. Keluhuran manusia sejati lahir dari pengakuan keluhuran Allah Al-Jalil.', color:'#2D1B69'},
+  {n:42,ar:'الْكَرِيمُ',lat:'Al-Karim',mean:'Yang Maha Pemurah',cat:'rahman',
+   makna:'Allah memberikan kebaikan tanpa diminta dan tanpa batas. Kedermawanan-Nya tidak pernah berkurang meski terus memberi kepada seluruh makhluk.',
+   amalan:'Latih kedermawanan dalam kehidupan sehari-hari. Memberi dengan ikhlas adalah cara meneladani sifat Al-Karim yang Maha Pemurah.', color:'#0D4A35'},
+  {n:43,ar:'الرَّقِيبُ',lat:'Ar-Raqib',mean:'Yang Maha Mengawasi',cat:'ilm',
+   makna:'Allah senantiasa mengawasi setiap gerak-gerik hamba-Nya. Pengawasan-Nya bukan untuk menghukum, tapi untuk menjaga dan membimbing.',
+   amalan:'Hiduplah seolah Allah selalu melihat setiap tindakan kita. Muraqabah kepada Allah melahirkan akhlak yang mulia dan konsisten.', color:'#1A3A5C'},
+  {n:44,ar:'الْمُجِيبُ',lat:'Al-Mujib',mean:'Yang Maha Mengabulkan',cat:'kudrah',
+   makna:'Allah mengabulkan setiap doa yang dipanjatkan hamba-Nya. Pengabulan-Nya mungkin tidak sesuai waktu yang kita inginkan, namun selalu tepat waktu menurut-Nya.',
+   amalan:'Jangan pernah berhenti berdoa. Allah Al-Mujib tidak pernah menutup telinga dari permohonan hamba-Nya.', color:'#8A6F2E'},
+  {n:45,ar:'الْوَاسِعُ',lat:'Al-Wasi',mean:'Yang Maha Luas',cat:'dzat',
+   makna:'Ilmu, rahmat, dan kuasa Allah tidak terbatas oleh apapun. Keluasan-Nya mencakup seluruh alam semesta dan lebih dari itu.',
+   amalan:'Jangan batasi harapan dan doa. Kepada Allah yang Maha Luas, tidak ada permintaan yang terlalu besar untuk dimohonkan.', color:'#2D1B69'},
+  {n:46,ar:'الْحَكِيمُ',lat:'Al-Hakim',mean:'Yang Maha Bijaksana',cat:'ilm',
+   makna:'Setiap kejadian dalam hidup mengandung hikmah yang mungkin tidak langsung terlihat. Allah tidak menciptakan sesuatu dengan sia-sia.',
+   amalan:'Terima setiap takdir dengan husnudzan. Di balik setiap kesulitan pasti ada hikmah yang indah.', color:'#1A3A5C'},
+  {n:47,ar:'الْوَدُودُ',lat:'Al-Wadud',mean:'Yang Maha Mengasihi',cat:'rahman',
+   makna:'Kecintaan Allah kepada hamba-Nya adalah murni dan tulus. Ia mencintai orang-orang beriman dengan kasih yang tidak tertandingi.',
+   amalan:'Cintai Allah melebihi segalanya. Cinta kepada Al-Wadud diwujudkan dengan melakukan apa yang dicintai-Nya dan menjauhi yang dibenci-Nya.', color:'#0D4A35'},
+  {n:48,ar:'الْمَجِيدُ',lat:'Al-Majid',mean:'Yang Maha Mulia',cat:'dzat',
+   makna:'Allah memiliki kemuliaan yang sempurna dari segala arah. Kemuliaan-Nya adalah asal dari segala kemuliaan yang ada di alam semesta.',
+   amalan:'Muliakan diri dengan mendekat kepada Allah Al-Majid. Kemuliaan manusia diukur dari seberapa dekat ia kepada Yang Maha Mulia.', color:'#2D1B69'},
+  {n:49,ar:'الْبَاعِثُ',lat:'Al-Baits',mean:'Yang Maha Membangkitkan',cat:'hidup',
+   makna:'Allah akan membangkitkan seluruh manusia pada hari kiamat untuk mempertanggungjawabkan seluruh amal perbuatan mereka di dunia.',
+   amalan:'Persiapkan bekal untuk hari kebangkitan. Setiap amal di dunia adalah investasi untuk kehidupan setelah dibangkitkan kembali.', color:'#5C2A0F'},
+  {n:50,ar:'الشَّهِيدُ',lat:'Asy-Syahid',mean:'Yang Maha Menyaksikan',cat:'ilm',
+   makna:'Allah menyaksikan setiap kejadian, setiap perbuatan, dan setiap niat. Kesaksian-Nya adalah yang paling akurat dan tidak bisa dibantah.',
+   amalan:'Ingatlah bahwa Allah menyaksikan segalanya. Jadikan kesadaran ini sebagai penjaga akhlak dalam setiap situasi.', color:'#1A3A5C'},
+  {n:51,ar:'الْحَقُّ',lat:'Al-Haqq',mean:'Yang Maha Benar',cat:'dzat',
+   makna:'Allah adalah kebenaran mutlak. Segala yang datang dari-Nya adalah haq, dan hanya dengan mengikuti-Nya manusia bisa menemukan kebenaran sejati.',
+   amalan:'Selalu berpihak kepada kebenaran meski pahit. Al-Haqq mengajarkan bahwa kejujuran adalah dasar dari seluruh kebaikan.', color:'#2D1B69'},
+  {n:52,ar:'الْوَكِيلُ',lat:'Al-Wakil',mean:'Yang Maha Memelihara',cat:'kudrah',
+   makna:'Allah adalah sebaik-baik pelindung dan penolong. Tawakkal kepada-Nya adalah menyerahkan segala urusan setelah berusaha secara maksimal.',
+   amalan:'Tawakal penuh kepada Allah setelah berusaha. Hasbunallah wa nikmal wakil — cukuplah Allah sebagai pelindung.', color:'#8A6F2E'},
+  {n:53,ar:'الْقَوِيُّ',lat:'Al-Qawiyyu',mean:'Yang Maha Kuat',cat:'kudrah',
+   makna:'Kekuatan Allah tidak terbatas dan tidak dapat dikalahkan. Segala kekuatan yang ada di alam semesta berasal dan bergantung kepada-Nya.',
+   amalan:'Cari kekuatan dari Allah, bukan dari manusia. Doa dan dzikir adalah sumber kekuatan hakiki yang tidak pernah habis.', color:'#8A6F2E'},
+  {n:54,ar:'الْمَتِينُ',lat:'Al-Matin',mean:'Yang Maha Kokoh',cat:'kudrah',
+   makna:'Kekuatan Allah adalah abadi dan kokoh. Tidak ada yang mampu menggoyang atau melemahkan kekuasaan dan kehendak-Nya.',
+   amalan:'Bangun fondasi hidup di atas ketaatan kepada Allah Al-Matin. Keteguhan iman adalah benteng yang tidak tertandingi.', color:'#8A6F2E'},
+  {n:55,ar:'الْوَلِيُّ',lat:'Al-Waliyyu',mean:'Yang Maha Melindungi',cat:'rahman',
+   makna:'Allah adalah pelindung orang-orang beriman. Ia mengeluarkan mereka dari kegelapan menuju cahaya dan menjaga mereka dari keburukan.',
+   amalan:'Jadikan Allah sebagai wali utama dalam hidup. Dengan Allah sebagai pelindung, tidak ada yang perlu ditakuti di dunia ini.', color:'#0D4A35'},
+  {n:56,ar:'الْحَمِيدُ',lat:'Al-Hamid',mean:'Yang Maha Terpuji',cat:'dzat',
+   makna:'Pujian yang sesungguhnya hanya layak bagi Allah. Seluruh keindahan dan kebaikan di alam semesta adalah alasan untuk memuji-Nya.',
+   amalan:'Perbanyak hamdalah — alhamdulillah dalam setiap keadaan. Rasa syukur adalah cara terindah memuji Allah Al-Hamid.', color:'#2D1B69'},
+  {n:57,ar:'الْمُحْصِيُ',lat:'Al-Muhshi',mean:'Yang Maha Menghitung',cat:'ilm',
+   makna:'Allah menghitung dan mencatat setiap hal tanpa terlewat satu pun. Setiap kebaikan dan keburukan tersimpan rapi dalam catatan-Nya.',
+   amalan:'Hitung kebaikan orang lain lebih banyak dari kesalahan mereka. Meneladani Al-Muhshi berarti berlaku adil dalam menilai sesama.', color:'#1A3A5C'},
+  {n:58,ar:'الْمُبْدِئُ',lat:'Al-Mubdi',mean:'Yang Maha Memulai',cat:'hidup',
+   makna:'Allah yang memulai penciptaan dari tiada. Setiap awal yang kita rasakan di dunia ini adalah cerminan dari sifat Al-Mubdi.',
+   amalan:'Jangan takut memulai kebaikan. Setiap langkah pertama dalam kebaikan mendapat dukungan dari Allah Al-Mubdi.', color:'#5C2A0F'},
+  {n:59,ar:'الْمُعِيدُ',lat:'Al-Muid',mean:'Yang Maha Mengembalikan',cat:'hidup',
+   makna:'Allah yang mengembalikan ciptaan kepada-Nya dan akan membangkitkan kembali pada hari kiamat. Kematian bukan akhir, melainkan perjalanan pulang.',
+   amalan:'Ingatlah bahwa kita akan kembali kepada Allah. Inna lillahi wa inna ilaihi rajiun — kesadaran ini menenteramkan hati.', color:'#5C2A0F'},
+  {n:60,ar:'الْمُحْيِي',lat:'Al-Muhyi',mean:'Yang Maha Menghidupkan',cat:'hidup',
+   makna:'Allah yang memberi kehidupan kepada segala sesuatu. Setiap napas yang kita hirup adalah bukti nyata kasih sayang Al-Muhyi.',
+   amalan:'Syukuri setiap napas dan kesehatan. Gunakan hidup yang Allah berikan untuk hal-hal yang membawa manfaat dan kebaikan.', color:'#5C2A0F'},
+  {n:61,ar:'الْمُمِيتُ',lat:'Al-Mumit',mean:'Yang Maha Mematikan',cat:'hidup',
+   makna:'Allah yang menetapkan kematian bagi setiap makhluk. Kematian bukan sesuatu yang menakutkan, melainkan perjumpaan dengan Sang Pencipta.',
+   amalan:'Persiapkan diri untuk menghadapi kematian dengan memperbanyak amal shalih. Sebaik-baik persiapan adalah ketaqwaan kepada Allah.', color:'#5C2A0F'},
+  {n:62,ar:'الْحَيُّ',lat:'Al-Hayyu',mean:'Yang Maha Hidup',cat:'hidup',
+   makna:'Allah hidup selamanya tanpa permulaan dan tanpa akhir. Kehidupan-Nya sempurna, tidak bergantung pada apapun dan tidak akan pernah berakhir.',
+   amalan:'Gantungkan hidup hanya kepada Allah Al-Hayyu yang Maha Hidup. Bergantung kepada yang fana hanya membawa kekecewaan.', color:'#5C2A0F'},
+  {n:63,ar:'الْقَيُّومُ',lat:'Al-Qayyum',mean:'Yang Maha Mandiri',cat:'dzat',
+   makna:'Allah berdiri sendiri tanpa membutuhkan apapun, sementara seluruh ciptaan bergantung kepada-Nya. Alam semesta tidak bisa tegak tanpa Al-Qayyum.',
+   amalan:'Sadari ketergantungan mutlak kepada Allah. Tidak ada kemandirian sejati tanpa koneksi dengan Allah Al-Qayyum.', color:'#2D1B69'},
+  {n:64,ar:'الْوَاجِدُ',lat:'Al-Wajid',mean:'Yang Maha Menemukan',cat:'ilm',
+   makna:'Allah yang menemukan dan mengetahui segalanya. Tidak ada yang tersembunyi dari-Nya, dan Ia selalu menemukan apa yang dicarinya.',
+   amalan:'Percayakan pencarian jalan keluar kepada Allah. Al-Wajid akan menunjukkan jalan ketika manusia sudah kehabisan akal.', color:'#1A3A5C'},
+  {n:65,ar:'الْمَاجِدُ',lat:'Al-Majid',mean:'Yang Maha Mulia',cat:'dzat',
+   makna:'Allah memiliki kemuliaan yang sempurna dan luhur. Kemuliaan-Nya terpancar dalam setiap ciptaan dan ketetapan-Nya yang indah.',
+   amalan:'Kejar kemuliaan hakiki melalui ilmu dan amal shalih. Mulia di mata Allah jauh lebih berharga dari mulia di mata manusia.', color:'#2D1B69'},
+  {n:66,ar:'الْوَاحِدُ',lat:'Al-Wahid',mean:'Yang Maha Tunggal',cat:'dzat',
+   makna:'Allah adalah satu-satunya Tuhan yang haq. Tidak ada sekutu, tandingan, atau yang setara dengan-Nya dalam apapun.',
+   amalan:'Teguhkan tauhid dalam hati dan lisan. La ilaha illallah bukan sekadar ucapan — ia adalah pengakuan ketunggalan Allah Al-Wahid.', color:'#2D1B69'},
+  {n:67,ar:'الاَحَدُ',lat:'Al-Ahad',mean:'Yang Maha Esa',cat:'dzat',
+   makna:'Keesaan Allah adalah absolut dan tidak dapat dibagi. Ia Esa dalam dzat, sifat, dan perbuatan-Nya.',
+   amalan:'Jadikan keesaan Allah sebagai fondasi seluruh kehidupan. Tidak ada tempat bergantung selain kepada Yang Maha Esa.', color:'#2D1B69'},
+  {n:68,ar:'الصَّمَدُ',lat:'Ash-Shamad',mean:'Yang Maha Dibutuhkan',cat:'dzat',
+   makna:'Allah adalah tujuan segala kebutuhan. Semua makhluk membutuhkan-Nya, sementara Ia tidak membutuhkan siapapun.',
+   amalan:'Bawa semua kebutuhan kepada Allah. Ia-lah sumber dari segala solusi, kecukupan, dan kebahagiaan.', color:'#2D1B69'},
+  {n:69,ar:'الْقَادِرُ',lat:'Al-Qadir',mean:'Yang Maha Menentukan',cat:'kudrah',
+   makna:'Allah memiliki kekuasaan penuh untuk menentukan segala sesuatu. Tidak ada yang di luar kemampuan-Nya.',
+   amalan:'Jangan batasi doa dengan pikiran yang sempit. Allah Al-Qadir berkuasa atas segalanya, termasuk hal yang tampak mustahil.', color:'#8A6F2E'},
+  {n:70,ar:'الْمُقْتَدِرُ',lat:'Al-Muqtadir',mean:'Yang Maha Berkuasa',cat:'kudrah',
+   makna:'Kekuasaan Allah tidak terbatas dan selalu terlaksana. Tidak ada satu pun kekuatan di alam semesta yang mampu menghalangi kehendak-Nya.',
+   amalan:'Hadapi setiap tantangan dengan keyakinan bahwa Allah Al-Muqtadir selalu berkuasa untuk memberikan jalan keluar.', color:'#8A6F2E'},
+  {n:71,ar:'الْمُقَدِّمُ',lat:'Al-Muqaddim',mean:'Yang Maha Mendahulukan',cat:'kudrah',
+   makna:'Allah mendahulukan siapa dan apa yang dikehendaki-Nya. Ia mendahulukan orang-orang beriman dalam rahmat dan kemuliaan-Nya.',
+   amalan:'Dahulukan Allah dalam setiap urusan. Prioritaskan ibadah dan ketaatan sebelum urusan duniawi.', color:'#8A6F2E'},
+  {n:72,ar:'الْمُؤَخِّرُ',lat:'Al-Muakhkhir',mean:'Yang Maha Mengakhirkan',cat:'kudrah',
+   makna:'Allah mengakhirkan siapa dan apa yang dikehendaki-Nya dengan hikmah yang sempurna. Terkadang sesuatu diakhirkan karena ada kebaikan yang lebih besar.',
+   amalan:'Terima dengan ikhlas ketika sesuatu yang diharapkan belum terwujud. Penundaan Allah adalah bagian dari rencana terbaik-Nya.', color:'#8A6F2E'},
+  {n:73,ar:'الأوَّلُ',lat:'Al-Awwal',mean:'Yang Maha Awal',cat:'dzat',
+   makna:'Allah ada sebelum segalanya ada. Tidak ada yang mendahului keberadaan-Nya karena Ia adalah awal dari segala awal.',
+   amalan:'Mulailah setiap niat dan pekerjaan dengan menyebut nama Allah. Basmalah adalah pengakuan bahwa Allah adalah yang pertama.', color:'#2D1B69'},
+  {n:74,ar:'الآخِرُ',lat:'Al-Akhir',mean:'Yang Maha Akhir',cat:'dzat',
+   makna:'Allah tetap ada setelah segalanya berakhir. Ia adalah akhir dari segala akhir, tidak ada yang melampaui keabadian-Nya.',
+   amalan:'Ingat bahwa hidup di dunia sementara, kembali kepada Allah adalah kepastian. Persiapkan diri untuk perjumpaan dengan Al-Akhir.', color:'#2D1B69'},
+  {n:75,ar:'الظَّاهِرُ',lat:'Adz-Dzahir',mean:'Yang Maha Nyata',cat:'dzat',
+   makna:'Allah nyata melalui tanda-tanda kebesaran-Nya di alam semesta. Setiap ciptaan adalah ayat yang membuktikan keberadaan-Nya.',
+   amalan:'Lihat tanda-tanda kebesaran Allah di alam sekitar. Mentadaburi alam adalah cara memperkuat iman kepada Allah Adz-Dzahir.', color:'#2D1B69'},
+  {n:76,ar:'الْبَاطِنُ',lat:'Al-Bathin',mean:'Yang Maha Tersembunyi',cat:'dzat',
+   makna:'Allah tersembunyi dari penglihatan manusia namun hadir di mana-mana. Kehadiran-Nya lebih dekat dari urat nadi kita sendiri.',
+   amalan:'Rasakan kehadiran Allah dalam setiap momen. Ia lebih dekat dari yang kita kira, lebih mengetahui dari yang kita sadari.', color:'#2D1B69'},
+  {n:77,ar:'الْوَالِي',lat:'Al-Wali',mean:'Yang Maha Memerintah',cat:'kudrah',
+   makna:'Allah memerintah dan mengatur seluruh alam semesta dengan sempurna. Tidak ada yang berjalan di luar ketetapan dan pengaturan-Nya.',
+   amalan:'Ikuti aturan Allah dalam kehidupan. Hukum Allah adalah pedoman terbaik untuk kehidupan yang harmonis dan bermartabat.', color:'#8A6F2E'},
+  {n:78,ar:'الْمُتَعَالِي',lat:'Al-Mutaali',mean:'Yang Maha Tinggi',cat:'dzat',
+   makna:'Ketinggian Allah melampaui segala yang bisa dibayangkan. Ia Maha Tinggi dari segala kekurangan, keserupaan, dan keterbatasan.',
+   amalan:'Rendahkan hati dan angkat jiwa kepada Allah Al-Mutaali. Semakin manusia merendah, semakin Allah meninggikan derajatnya.', color:'#2D1B69'},
+  {n:79,ar:'الْبَرُّ',lat:'Al-Barr',mean:'Yang Maha Penderma',cat:'rahman',
+   makna:'Allah penuh dengan kebaikan dan kemurahan hati. Ia memberikan kebaikan kepada seluruh makhluk-Nya tanpa diminta dan tanpa batas.',
+   amalan:'Jadilah orang yang banyak berbuat baik tanpa mengharapkan imbalan. Meneladani Al-Barr adalah dengan menjadi sumber kebaikan bagi lingkungan sekitar.', color:'#0D4A35'},
+  {n:80,ar:'التَّوَّابُ',lat:'At-Tawwab',mean:'Yang Maha Penerima Taubat',cat:'rahman',
+   makna:'Allah selalu menerima taubat hamba-Nya yang kembali dengan sungguh-sungguh. Pintu taubat tidak pernah ditutup selama nyawa masih di badan.',
+   amalan:'Taubat nasuha setiap hari. Jangan biarkan dosa menumpuk — Allah At-Tawwab selalu siap menerima kembali hamba yang insaf.', color:'#0D4A35'},
+  {n:81,ar:'الْمُنْتَقِمُ',lat:'Al-Muntaqim',mean:'Yang Maha Pemberi Balasan',cat:'kudrah',
+   makna:'Allah memberikan balasan yang setimpal kepada para pelaku kezaliman. Tidak ada satu pun kezaliman yang luput dari keadilan-Nya.',
+   amalan:'Jauhi kezaliman kepada siapapun. Serahkan urusan pembalasan kepada Allah Al-Muntaqim dan fokus pada perbaikan diri sendiri.', color:'#8A6F2E'},
+  {n:82,ar:'الْعَفُوُّ',lat:'Al-Afuwwu',mean:'Yang Maha Pemaaf',cat:'rahman',
+   makna:'Allah bukan hanya mengampuni dosa, tapi menghapus bekas-bekas dosa tersebut seolah tidak pernah terjadi. Pemaafan-Nya adalah yang paling sempurna.',
+   amalan:'Maafkan orang lain dengan tulus. Meneladani Al-Afuwwu berarti membersihkan hati dari dendam dan memberikan kesempatan baru.', color:'#0D4A35'},
+  {n:83,ar:'الرَّؤُوفُ',lat:'Ar-Rauf',mean:'Yang Maha Pengasuh',cat:'rahman',
+   makna:'Kasih sayang Allah begitu lembut dan halus. Ia tidak hanya memberi yang diminta, tapi juga yang dibutuhkan hamba-Nya meski tidak disadari.',
+   amalan:'Tunjukkan kasih sayang yang tulus kepada orang-orang sekitar. Kelembutan adalah kekuatan yang lebih besar dari kekerasan.', color:'#0D4A35'},
+  {n:84,ar:'مَالِكُ الْمُلْكِ',lat:'Malikul Mulk',mean:'Yang Maha Penguasa Kerajaan',cat:'kudrah',
+   makna:'Seluruh kekuasaan di langit dan bumi adalah milik Allah semata. Semua pemimpin dan penguasa dunia hanyalah penjaga amanah dari-Nya.',
+   amalan:'Gunakan setiap amanah kekuasaan dengan adil dan bertanggung jawab. Semua akan dipertanggungjawabkan kepada Malikul Mulk.', color:'#8A6F2E'},
+  {n:85,ar:'ذُوالْجَلاَلِ وَالإِكْرَامِ',lat:'Dzul Jalal Wal Ikram',mean:'Yang Maha Pemilik Kebesaran',cat:'dzat',
+   makna:'Allah memiliki keagungan yang mutlak sekaligus memuliakan hamba-hamba-Nya dengan mulia. Dua sifat yang sempurna ini berpadu dalam diri-Nya.',
+   amalan:'Hadirkan rasa takzim dan cinta sekaligus dalam beribadah. Takut kepada kebesaran-Nya dan rindu kepada kemuliaan yang Ia janjikan.', color:'#2D1B69'},
+  {n:86,ar:'الْمُقْسِطُ',lat:'Al-Muqsith',mean:'Yang Maha Adil',cat:'dzat',
+   makna:'Allah menegakkan keadilan secara sempurna dalam setiap keputusan-Nya. Tidak ada diskriminasi atau keberpihakan yang tidak adil di hadapan-Nya.',
+   amalan:'Tegakkan keadilan dalam setiap peran yang dijalani. Keadilan adalah pilar peradaban yang Allah amanatkan kepada manusia.', color:'#2D1B69'},
+  {n:87,ar:'الْجَامِعُ',lat:'Al-Jami',mean:'Yang Maha Mengumpulkan',cat:'kudrah',
+   makna:'Allah akan mengumpulkan seluruh umat manusia pada hari perhitungan. Ia juga menyatukan segala yang berserakan sesuai hikmah-Nya.',
+   amalan:'Jaga tali silaturahmi dan persatuan umat. Allah Al-Jami menyukai persatuan dan membenci perpecahan.', color:'#8A6F2E'},
+  {n:88,ar:'الْغَنِيُّ',lat:'Al-Ghaniyyu',mean:'Yang Maha Kaya',cat:'dzat',
+   makna:'Kekayaan Allah tidak terbatas dan tidak berkurang meski memberi kepada seluruh makhluk. Ia tidak membutuhkan apapun dari ciptaan-Nya.',
+   amalan:'Jadilah kaya hati meski sederhana harta. Kekayaan sejati adalah merasa cukup dengan pemberian Allah Al-Ghaniyyu.', color:'#2D1B69'},
+  {n:89,ar:'الْمُغْنِي',lat:'Al-Mughni',mean:'Yang Maha Memberi Kekayaan',cat:'rahman',
+   makna:'Allah yang mencukupkan dan memperkaya siapa yang dikehendaki-Nya. Kecukupan datang dari-Nya, bukan dari banyaknya harta semata.',
+   amalan:'Berdoa memohon kecukupan, bukan sekadar banyaknya materi. Kecukupan dari Allah Al-Mughni membawa ketenangan yang tidak ternilai.', color:'#0D4A35'},
+  {n:90,ar:'الْمَانِعُ',lat:'Al-Mani',mean:'Yang Maha Mencegah',cat:'kudrah',
+   makna:'Allah mencegah hal-hal yang tidak baik menimpa hamba-hamba-Nya yang dikehendaki. Setiap halangan mungkin adalah perlindungan dari-Nya.',
+   amalan:'Bersyukur ketika suatu keinginan tidak terpenuhi. Mungkin Allah Al-Mani sedang mencegah keburukan yang tidak kita sadari.', color:'#8A6F2E'},
+  {n:91,ar:'الضَّارُّ',lat:'Adh-Dharr',mean:'Yang Maha Pemberi Derita',cat:'kudrah',
+   makna:'Allah yang menetapkan ujian dan kesengsaraan sebagai bagian dari rencana-Nya yang lebih besar. Setiap derita memiliki hikmah dan tujuan ilahi.',
+   amalan:'Hadapi ujian dengan sabar dan husnudzan kepada Allah. Setiap penderitaan yang diterima dengan sabar bernilai pahala yang luar biasa.', color:'#8A6F2E'},
+  {n:92,ar:'النَّافِعُ',lat:'An-Nafi',mean:'Yang Maha Memberi Manfaat',cat:'rahman',
+   makna:'Segala manfaat yang dirasakan manusia berasal dari Allah An-Nafi. Ia yang menentukan apa yang berguna dan bermanfaat bagi makhluk-Nya.',
+   amalan:'Jadilah manusia yang bermanfaat bagi sesama. Sebaik-baik manusia adalah yang paling banyak manfaatnya, meneladani sifat An-Nafi.', color:'#0D4A35'},
+  {n:93,ar:'النُّورُ',lat:'An-Nur',mean:'Yang Maha Bercahaya',cat:'dzat',
+   makna:'Allah adalah cahaya yang menerangi langit dan bumi. Al-Quran dan petunjuk-Nya adalah cahaya yang memandu manusia dalam kegelapan.',
+   amalan:'Cari cahaya melalui Al-Quran dan ilmu agama. Hati yang diterangi cahaya Allah An-Nur tidak akan tersesat dalam kegelapan dunia.', color:'#2D1B69'},
+  {n:94,ar:'الْهَادِي',lat:'Al-Hadi',mean:'Yang Maha Pemberi Petunjuk',cat:'rahman',
+   makna:'Allah adalah satu-satunya yang mampu memberikan hidayah sejati. Petunjuk-Nya adalah lentera dalam kegelapan kehidupan.',
+   amalan:'Minta hidayah setiap hari dalam shalat. Ihdinas siratal mustaqim adalah doa yang paling sering kita panjatkan kepada Al-Hadi.', color:'#0D4A35'},
+  {n:95,ar:'الْبَدِيعُ',lat:'Al-Badi',mean:'Yang Maha Pencipta',cat:'kudrah',
+   makna:'Allah menciptakan sesuatu yang benar-benar baru, unik, dan indah tanpa contoh sebelumnya. Setiap ciptaan-Nya adalah keajaiban yang tak tertandingi.',
+   amalan:'Kagumi keindahan dan keunikan ciptaan Allah. Rasa takjub atas keindahan alam adalah jalan menuju pengenalan kepada Al-Badi.', color:'#8A6F2E'},
+  {n:96,ar:'الْبَاقِي',lat:'Al-Baqi',mean:'Yang Maha Kekal',cat:'dzat',
+   makna:'Allah kekal selamanya tanpa akhir. Semua yang ada di dunia akan fana, hanya Allah Al-Baqi yang tetap abadi selama-lamanya.',
+   amalan:'Investasikan untuk kehidupan yang kekal. Amal shalih adalah yang akan bertahan, bukan harta dan jabatan yang sementara.', color:'#2D1B69'},
+  {n:97,ar:'الْوَارِثُ',lat:'Al-Warits',mean:'Yang Maha Pewaris',cat:'kudrah',
+   makna:'Pada akhirnya, semua akan kembali kepada Allah Al-Warits. Ia mewarisi apa yang ditinggalkan seluruh makhluk ketika mereka tiada.',
+   amalan:'Jangan terlalu terikat pada harta dunia. Semua hanyalah titipan yang akan diwarisi Allah pada waktunya.', color:'#8A6F2E'},
+  {n:98,ar:'الرَّشِيدُ',lat:'Ar-Rasyid',mean:'Yang Maha Pandai',cat:'ilm',
+   makna:'Allah Maha Pandai dalam mengatur dan menentukan setiap urusan sesuai hikmah-Nya yang sempurna. Setiap ketetapan-Nya adalah yang terbaik.',
+   amalan:'Ikuti petunjuk Allah Al-Rasyid dalam setiap keputusan hidup. Musyawarah dan istikharah adalah cara memohon bimbingan kebijaksanaan-Nya.', color:'#1A3A5C'},
+  {n:99,ar:'الصَّبُورُ',lat:'Ash-Shabur',mean:'Yang Maha Sabar',cat:'rahman',
+   makna:'Allah tidak segera menghukum hamba yang berdosa, memberi waktu untuk bertaubat. Kesabaran-Nya melampaui segala pengertian manusia.',
+   amalan:'Latih kesabaran menghadapi ujian hidup. Setiap cobaan adalah undangan untuk semakin dekat dengan-Nya.', color:'#0D4A35'},
+];
+
+// ===== NAMES GRID =====
+function renderNames(cat) {
+  const grid = document.getElementById('namesGrid');
+  const filtered = cat === 'all' ? allNames : allNames.filter(n => n.cat === cat);
+  grid.innerHTML = filtered.map((n, i) => `
+    <div class="name-card clickable-card" data-idx="${n.n - 1}" style="animation-delay:${i*0.02}s">
+      <span class="name-number">${String(n.n).padStart(2,'0')}</span>
+      <span class="name-arabic">${n.ar}</span>
+      <span class="name-latin">${n.lat}</span>
+      <span class="name-meaning">${n.mean}</span>
+      <span class="tap-hint">Ketuk untuk makna ↗</span>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.name-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = parseInt(card.dataset.idx);
+      goToMakna(idx);
+    });
+  });
+}
+
+function goToMakna(nameIdx) {
+  // Calculate which page the name is on (6 per page)
+  const page = Math.floor(nameIdx / 6);
+  currentMaknaPage = page;
+  renderMaknaPage(page);
+
+  // Scroll to makna section
+  document.getElementById('makna').scrollIntoView({ behavior: 'smooth' });
+
+  // Show indicator
+  const name = allNames[nameIdx];
+  const indicator = document.getElementById('maknaIndicator');
+  document.getElementById('indicatorArabic').textContent = name.ar + ' — ' + name.lat;
+  document.getElementById('indicatorLatin').textContent = name.mean;
+  indicator.classList.add('visible');
+
+  // Highlight the specific card after render
+  setTimeout(() => {
+    const cards = document.querySelectorAll('.makna-card');
+    const cardInPage = nameIdx % 6;
+    cards.forEach(c => c.classList.remove('highlighted'));
+    if (cards[cardInPage]) {
+      cards[cardInPage].classList.add('highlighted');
+      cards[cardInPage].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 400);
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderNames(btn.dataset.cat);
+  });
+});
+renderNames('all');
+
+// ===== MAKNA GRID — all 99 names, 6 per page =====
+const MAKNA_PER_PAGE = 6;
+let currentMaknaPage = 0;
+const totalMaknaPages = Math.ceil(allNames.length / MAKNA_PER_PAGE);
+
+const COLOR_MAP = {
+  '#0D4A35': 'emerald',
+  '#8A6F2E': 'gold',
+  '#3D2E14': 'ink',
+};
+
+function renderMaknaPage(page) {
+  const grid = document.getElementById('maknaGrid');
+  const start = page * MAKNA_PER_PAGE;
+  const slice = allNames.slice(start, start + MAKNA_PER_PAGE);
+
+  grid.innerHTML = slice.map((n, i) => {
+    const delay = i * 0.07;
+    return `
+    <div class="makna-card reveal" style="transition-delay:${delay}s" data-name-idx="${start + i}">
+      <div class="makna-card-top" style="background:${n.color}">
+        <div class="makna-arabic-bg">${n.ar}</div>
+        <span class="name">${n.ar}</span>
+        <span class="latin">${n.lat}</span>
+        <span class="meaning">${n.mean}</span>
+      </div>
+      <div class="makna-card-body">
+        <div class="life-title">DALAM KEHIDUPAN</div>
+        <p>${n.makna}</p>
+        <div class="amalan">💡 <strong>Amalan:</strong> ${n.amalan}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Re-observe new reveal elements
+  grid.querySelectorAll('.reveal').forEach(el => {
+    el.classList.remove('visible');
+    revealObs.observe(el);
+  });
+
+  // Update pagination
+  document.getElementById('pageInfo').textContent = `${page + 1} / ${totalMaknaPages}`;
+  document.getElementById('btnPrevPage').disabled = page === 0;
+  document.getElementById('btnNextPage').disabled = page === totalMaknaPages - 1;
+}
+
+renderMaknaPage(0);
+
+document.getElementById('btnPrevPage').addEventListener('click', () => {
+  if (currentMaknaPage > 0) {
+    currentMaknaPage--;
+    renderMaknaPage(currentMaknaPage);
+    document.getElementById('makna').scrollIntoView({ behavior: 'smooth' });
+  }
+});
+document.getElementById('btnNextPage').addEventListener('click', () => {
+  if (currentMaknaPage < totalMaknaPages - 1) {
+    currentMaknaPage++;
+    renderMaknaPage(currentMaknaPage);
+    document.getElementById('makna').scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+// ===== KATA BIJAK =====
+const kataBijakData = [
+  {
+    arabic: 'إِنَّ مَعَ الْعُسْرِ يُسْرًا',
+    terjemah: '"Sesungguhnya bersama kesulitan ada kemudahan." Ayat ini diulang dua kali dalam satu surah — Allah ingin menegaskan bahwa tidak ada kesulitan yang sendirian; kemudahan selalu menyertainya.',
+    source: 'QS. Al-Insyirah : 6'
+  },
+  {
+    arabic: 'وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ',
+    terjemah: '"Dan barangsiapa bertawakal kepada Allah, niscaya Allah akan mencukupkan keperluannya." Penyerahan diri yang tulus kepada Allah adalah kunci terpenuhinya segala kebutuhan.',
+    source: 'QS. Ath-Thalaq : 3'
+  },
+  {
+    arabic: 'وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ',
+    terjemah: '"Dan apabila hamba-hamba-Ku bertanya kepadamu tentang Aku, maka sesungguhnya Aku dekat. Aku mengabulkan permohonan orang yang berdoa apabila ia berdoa kepada-Ku."',
+    source: 'QS. Al-Baqarah : 186'
+  },
+  {
+    arabic: 'لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا',
+    terjemah: '"Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya." Setiap ujian yang Allah berikan telah disesuaikan dengan kemampuan kita — tidak lebih, tidak kurang.',
+    source: 'QS. Al-Baqarah : 286'
+  },
+  {
+    arabic: 'فَاذْكُرُونِي أَذْكُرْكُمْ',
+    terjemah: '"Maka ingatlah Aku, niscaya Aku pun akan ingat kepadamu." Sebuah janji timbal balik yang indah — ketika kita mengingat Allah, Dia pun mengingat kita.',
+    source: 'QS. Al-Baqarah : 152'
+  },
+  {
+    arabic: 'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ',
+    terjemah: '"Sesungguhnya Allah bersama orang-orang yang sabar." Kesabaran bukan hanya sikap pasif — ia adalah kekuatan yang mengundang kehadiran dan pertolongan Allah.',
+    source: 'QS. Al-Baqarah : 153'
+  },
+  {
+    arabic: 'وَبَشِّرِ الصَّابِرِينَ الَّذِينَ إِذَا أَصَابَتْهُم مُّصِيبَةٌ قَالُوا إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ',
+    terjemah: '"Dan sampaikanlah kabar gembira kepada orang-orang yang sabar, yaitu orang-orang yang apabila ditimpa musibah, mereka berucap: Inna lillahi wa inna ilaihi raji\'un."',
+    source: 'QS. Al-Baqarah : 155-156'
+  },
+  {
+    arabic: 'الدُّنْيَا سِجْنُ الْمُؤْمِنِ وَجَنَّةُ الْكَافِرِ',
+    terjemah: '"Dunia adalah penjara bagi orang mukmin dan surga bagi orang kafir." Hadits ini bukan untuk membuat kita bersedih, melainkan mengingatkan bahwa yang terbaik masih menanti.',
+    source: 'HR. Muslim no. 2956'
+  },
+  {
+    arabic: 'مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ طَرِيقًا إِلَى الْجَنَّةِ',
+    terjemah: '"Barangsiapa menempuh jalan untuk mencari ilmu, Allah akan memudahkan baginya jalan menuju surga." Setiap langkah dalam perjalanan menuntut ilmu adalah investasi abadi.',
+    source: 'HR. Muslim no. 2699'
+  },
+  {
+    arabic: 'خَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ',
+    terjemah: '"Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia lainnya." Ukuran kebaikan seseorang bukan pada hartanya, tapi pada seberapa banyak ia memberi manfaat.',
+    source: 'HR. Ahmad, Thabrani — dinilai hasan'
+  },
+  {
+    arabic: 'الْمُؤْمِنُ لِلْمُؤْمِنِ كَالْبُنْيَانِ يَشُدُّ بَعْضُهُ بَعْضًا',
+    terjemah: '"Orang mukmin bagi orang mukmin lainnya ibarat bangunan yang saling menguatkan satu sama lain." Persaudaraan sejati adalah saling menyokong, bukan saling melemahkan.',
+    source: 'HR. Bukhari no. 481, Muslim no. 2585'
+  },
+  {
+    arabic: 'أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ',
+    terjemah: '"Ingatlah, hanya dengan mengingat Allah hati menjadi tenteram." Di tengah hiruk-pikuk dunia yang melelahkan, dzikir adalah obat ketenangan yang paling mujarab.',
+    source: 'QS. Ar-Ra\'d : 28'
+  },
+];
+
+let currentBijak = 0;
+
+function renderBijak(idx) {
+  const card = document.getElementById('bijakCard');
+  card.classList.add('fade-out');
+
+  setTimeout(() => {
+    const b = kataBijakData[idx];
+    document.getElementById('bijakArabic').textContent = b.arabic;
+    document.getElementById('bijakTerjemah').textContent = b.terjemah;
+    document.getElementById('bijakSource').textContent = b.source;
+
+    // Update dots
+    document.querySelectorAll('.bijak-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+
+    card.classList.remove('fade-out');
+    card.classList.add('fade-in');
+    setTimeout(() => card.classList.remove('fade-in'), 500);
+  }, 250);
+}
+
+// Build dots
+const dotsEl = document.getElementById('bijakDots');
+dotsEl.innerHTML = kataBijakData.map((_, i) => `<div class="bijak-dot${i===0?' active':''}"></div>`).join('');
+
+renderBijak(0);
+
+document.getElementById('btnBijakPrev').addEventListener('click', () => {
+  currentBijak = (currentBijak - 1 + kataBijakData.length) % kataBijakData.length;
+  renderBijak(currentBijak);
+});
+document.getElementById('btnBijakNext').addEventListener('click', () => {
+  currentBijak = (currentBijak + 1) % kataBijakData.length;
+  renderBijak(currentBijak);
+});
+document.getElementById('btnBijakAcak').addEventListener('click', () => {
+  let rand;
+  do { rand = Math.floor(Math.random() * kataBijakData.length); } while (rand === currentBijak);
+  currentBijak = rand;
+  renderBijak(currentBijak);
+});
+
+// ===== TICKER =====
+const tickerNames = ['الرَّحْمَنُ','الرَّحِيمُ','الْمَلِكُ','الْقُدُّوسُ','السَّلاَمُ','الْعَزِيزُ','الْخَالِقُ','الْعَلِيمُ','الرَّزَّاقُ','الْحَكِيمُ','النُّورُ','الْحَيُّ','الْقَيُّومُ','الْوَاحِدُ','الاَحَدُ','الصَّمَدُ'];
+const ticker = document.getElementById('tickerInner');
+const doubled = [...tickerNames,...tickerNames,...tickerNames,...tickerNames];
+ticker.innerHTML = doubled.map(n => `<span class="ticker-name">${n}</span><span class="ticker-dot">✦</span>`).join('');
+</script>
+</body>
+</html>
